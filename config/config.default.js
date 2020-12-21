@@ -1,3 +1,9 @@
+/*
+ * @Author: lts
+ * @Date: 2020-12-18 20:19:06
+ * @LastEditTime: 2020-12-21 10:29:51
+ * @FilePath: \react-blog\blog-server\config\config.default.js
+ */
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
@@ -22,7 +28,35 @@ module.exports = appInfo => {
   const userConfig = {
     // myAppName: 'egg',
   };
-
+  config.mysql = {
+    // database configuration
+    client: {
+      // host
+      host: 'localhost',
+      // port
+      port: '3306',
+      // username
+      user: 'root',
+      // password
+      password: 'admin',
+      // database
+      database: 'next_blog',
+    },
+    // load into app, default is open
+    app: true,
+    // load into agent, default is close
+    agent: false,
+  };
+  config.security = {
+    csrf: {
+      enable: false
+    },
+    domainWhiteList: ['*']
+  };
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
+  };
   return {
     ...config,
     ...userConfig,
