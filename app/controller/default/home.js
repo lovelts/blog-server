@@ -1,7 +1,7 @@
 /*
  * @Author: lts
  * @Date: 2020-12-18 20:19:06
- * @LastEditTime: 2020-12-21 17:43:44
+ * @LastEditTime: 2020-12-23 11:02:10
  * @FilePath: \react-blog\blog-server\app\controller\default\home.js
  */
 'use strict';
@@ -36,7 +36,7 @@ class HomeController extends Controller {
                  limit ${startNum},${pageSize}
                  `
       const ret = await this.app.mysql.query(sql)
-      // console.log(ret)
+      console.log(ret)
       ret.forEach(item => {
         // console.log(parseInt(item.create_time))
         item.create_time = moment(parseInt(item.create_time)).format(dateFormat)
@@ -54,7 +54,6 @@ class HomeController extends Controller {
     //先配置路由的动态传值，然后再接收值
     let id = this.ctx.query.id
     if (this.ctx.query.hasOwnProperty('id')) {
-      console.log(4444)
       let sql = `SELECT blog.id as id,
       blog.title as title,
       blog.introduce as introduce,
@@ -69,9 +68,15 @@ class HomeController extends Controller {
       const result = await this.app.mysql.query(sql)
       this.ctx.body = { data: result[0] }
     } else {
-      this.ctx.body = { data: '参数出错啦'}
+      this.ctx.body = { data: '参数出错啦' }
     }
 
+  }
+  async getBlogTypeName() {
+    const sql = `select * from blog_type order by blog_type.order desc`
+    const ret = await this.app.mysql.query(sql)
+    console.log(ret)
+    this.ctx.body = { data: ret }
   }
 }
 
