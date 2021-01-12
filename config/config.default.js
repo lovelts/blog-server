@@ -1,7 +1,7 @@
 /*
  * @Author: lts
  * @Date: 2020-12-18 20:19:06
- * @LastEditTime: 2020-12-21 10:29:51
+ * @LastEditTime: 2021-01-12 19:53:02
  * @FilePath: \react-blog\blog-server\config\config.default.js
  */
 /* eslint valid-jsdoc: "off" */
@@ -23,7 +23,14 @@ module.exports = appInfo => {
 
   // add your middleware config here
   config.middleware = [];
-
+  // 修改默认端口号
+  config.cluster = {
+    listen: {
+      path: '',
+      port: 3255,
+      hostname: '0.0.0.0',
+    },
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
@@ -49,13 +56,13 @@ module.exports = appInfo => {
   };
   config.security = {
     csrf: {
-      enable: false
+      enable: false,
     },
-    domainWhiteList: ['*']
+    domainWhiteList: [ '*' ],
   };
   config.cors = {
     origin: '*',
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };
   return {
     ...config,
